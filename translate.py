@@ -14,13 +14,15 @@ def translate_sequence(rna_sequence, genetic_code):
     an empty string is returned.
     """
     #pass
+    stop_codon="UGA" or "UAA" or "UAG"
+    AA_seq=""
     if len(rna_sequence) >= 3 and rna_sequence[0:3] != "UGA" and rna_sequence[0:3] !="UAA" and rna_sequence[0:3]!="UAG":
-        for cod,AA in genetic_code.items():
-            for i in range(0,len(rna_sequence), 3):
-                if i==cod:
-                    print (AA)
-    else:
-        return ''
+        for i in range(0,len(rna_sequence), 3):
+            codon=rna_sequence[i:i+3]
+            AA_seq+=genetic_code[codon]
+            if i==stop_codon:
+                break
+    return AA_seq
 def get_all_translations(rna_sequence, genetic_code):
     """Get a list of all amino acid sequences encoded by an RNA sequence.
 
@@ -36,8 +38,17 @@ def get_all_translations(rna_sequence, genetic_code):
     If no amino acids can be translated from `rna_sequence`, an empty list is
     returned.
     """
-    pass
-
+    #pass
+    stop_codon="UGA" or "UAA" or "UAG"
+    start_codon="AUG"
+    AA_seq_frame1=""
+    AA_seq_frame2=""
+    AA_seq_frame3=""
+    if len(rna_sequence) >= 3 and rna_sequence[0:3] != "UGA" and rna_sequence[0:3] !="UAA" and rna_sequence[0:3]!="UAG":
+        for codon,AA in genetic_code.items():
+            for i in range(0,len(rna_sequence), 3):
+                if i==start_codon:
+                    AA_seq_frame1=""
 def get_reverse(sequence):
     """Reverse orientation of `sequence`.
 
