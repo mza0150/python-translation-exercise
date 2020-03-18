@@ -46,6 +46,7 @@ def get_all_translations(rna_sequence, genetic_code):
     returned.
     """
     #pass
+    rna_sequence=rna_sequence.upper()
     total_rna_bases=len(rna_sequence)
     last_codon= total_rna_bases-3
     polypeptide_list = []
