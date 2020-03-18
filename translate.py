@@ -67,6 +67,7 @@ def get_reverse(sequence):
     If `sequence` is empty, an empty string is returned.
     """
     #pass
+    sequence=sequence.upper()
     rna_rev_list=sequence[::-1]
     return rna_rev_list
 
@@ -78,6 +79,7 @@ def get_complement(sequence):
     If `sequence` is empty, an empty string is returned.
     """
     #pass
+    sequence=sequence.upper()
     rna_list=list(sequence)
     comlement_sequence=[]
     complement= {'A' : 'U', 'C' : 'G', 'G': 'C', 'U': 'A'}
