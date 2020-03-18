@@ -96,6 +96,7 @@ def reverse_and_complement(sequence):
     If `sequence` is empty, an empty string is returned.
     """
     #pass
+    sequence=sequence.upper()
     rna_list = list(sequence)
     rna_list.reverse()
     rev_c = []
