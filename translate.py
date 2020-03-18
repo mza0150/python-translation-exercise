@@ -16,6 +16,7 @@ def translate_sequence(rna_sequence, genetic_code):
     #pass
 
     AA_list = []
+    rna_sequence=rna_sequence.upper()
     rna_list = list(rna_sequence)
     while True:
         if len(rna_list) > 2:
