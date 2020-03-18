@@ -13,20 +13,27 @@ def translate_sequence(rna_sequence, genetic_code):
     If `rna_sequence` is less than 3 bases long, or starts with a stop codon,
     an empty string is returned.
     """
-    #pass
-
+    #Crate an empty list to store AA sequence:
     AA_list = []
+    # Convert all rna_sequence to upper case:
     rna_sequence=rna_sequence.upper()
+    # Convert all rna_sequence into a list:
     rna_list = list(rna_sequence)
+    # This conditon will run if rna_sequence is at least 3 bases long, and only once it find start codon ,
+    #and stop once it finds stop codon.
     while True:
         if len(rna_list) > 2:
             codon=''.join(rna_list[0:3])
+    #Delete first 3 bases since its alread added as codon, thus no longer needed.
             del rna_list[0:3]
         else:
             break
+    #Using genetic code dictionary to find AA for each corresponding codon:
         AA=genetic_code[codon]
+    #Break loop once it finds stop codon
         if AA=='*':
             break
+    #Add add translatable AA to the AA_list:
         AA_list.append(AA)
     return ''.join(AA_list)
 
