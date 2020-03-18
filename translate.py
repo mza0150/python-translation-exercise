@@ -52,17 +52,23 @@ def get_all_translations(rna_sequence, genetic_code):
     If no amino acids can be translated from `rna_sequence`, an empty list is
     returned.
     """
-    #pass
+    #Convert all rna_sequence to upper case:
     rna_sequence=rna_sequence.upper()
+    #get the lengh of RNA seq.
     total_rna_bases=len(rna_sequence)
-    last_codon= total_rna_bases-3
+    #Create an empty list to store all possible AA seq.
     polypeptide_list = []
-    for i in range(last_codon+1):
+    #Looping through all the RNA bases, selecting all 3 possible reading frames to scan for tranlation.
+    for i in range(total_rna_bases):
         i_end= i +3
         next_three=rna_sequence[i:i_end]
+    #Condition to check if the condon is start codon
         if  next_three=='AUG':
+    #If condition satisfies, translate all rna seq from start to stop codon using first function,
+    #translate_sequence
             polypeptide=translate_sequence(rna_sequence[i:], genetic_code)
             polypeptide_list.append(polypeptide)
+    #Return all 3 possible reading frames as a list in polypeptide_list
     return polypeptide_list
 
 def get_reverse(sequence):
@@ -72,8 +78,9 @@ def get_reverse(sequence):
 
     If `sequence` is empty, an empty string is returned.
     """
-    #pass
+    #Convert all rna_sequence to upper case:
     sequence=sequence.upper()
+    #reverse rna sequence:
     rna_rev_list=sequence[::-1]
     return rna_rev_list
 
@@ -84,11 +91,15 @@ def get_complement(sequence):
 
     If `sequence` is empty, an empty string is returned.
     """
-    #pass
+    #Convert all rna_sequence to upper case:
     sequence=sequence.upper()
+    # Conver RNA sequence into a list
     rna_list=list(sequence)
+    #Create an empty list to store complement sequence:
     comlement_sequence=[]
+    #Complement code corresponsing for all RNA bases
     complement= {'A' : 'U', 'C' : 'G', 'G': 'C', 'U': 'A'}
+    # Looping through all the bases in RNA seq. to convert to its complement seq using dictionary values.
     for i in rna_list:
         comlement_sequence.append(complement[i])
     return ''.join(comlement_sequence)
@@ -101,12 +112,17 @@ def reverse_and_complement(sequence):
 
     If `sequence` is empty, an empty string is returned.
     """
-    #pass
+    #Convert all rna_sequence to upper case:
     sequence=sequence.upper()
+    # Conver RNA sequence into a list
     rna_list = list(sequence)
+    #reverse rna sequence:
     rna_list.reverse()
+    #Create an empty list to store reverse complement seq.
     rev_c = []
+    #Complement code corresponsing for all RNA bases
     complement = {'A' : 'U', 'C' : 'G', 'G': 'C', 'U': 'A'}
+    #Looping through all the bases in complement RNA seq. of reversed RNA seq. using dictionary values.
     for i in rna_list:
         rev_c.append(complement[i])
     return ''.join(rev_c)
@@ -121,14 +137,17 @@ def get_longest_peptide(rna_sequence, genetic_code):
     If no amino acids can be translated from `rna_sequence` nor its reverse and
     complement, an empty string is returned.
     """
-    #pass
+    #Create an empty list to store longest_peptide:
     pp_all=[]
+    #use get_all_translation to get all 3 possible AA seq.
     polypeptide_list = get_all_translations(rna_sequence, genetic_code)
-    polypeptide_list_long=''.join(polypeptide_list)
+    #Create reverse complement sequence using reverse_and_complement function
     rev_c_seq = reverse_and_complement(rna_sequence)
+    #use get_all_translation to get all 3 possible reverse_complement AA seq.
     polypeptide_list_rev_c=get_all_translations(rev_c_seq, genetic_code)
-    polypeptide_list_rev_c_long=''.join(polypeptide_list_rev_c)
+    #Concatenate all possible 6 AA sequences and store in pp_all list:
     pp_all=polypeptide_list+polypeptide_list_rev_c
+    #Find the longest peptide, if RNA seq. is empty, return empty seq.
     if pp_all==[]:
         return ""
     else:
