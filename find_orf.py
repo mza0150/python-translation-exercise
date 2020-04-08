@@ -207,6 +207,7 @@ def find_first_orf(sequence,
     # exactly. Change `orf_pattern_str` so that it will match any open reading
     # frame.
     # Read the docstring above for additional clues.
+    #The code below will find match any open reading frame
     orf_pattern_str =  r'('+r'|'.join(starts)+r')([AUCG]{3})*('+r'|'.join(stops)+r')'
     ##########################################################################
 
