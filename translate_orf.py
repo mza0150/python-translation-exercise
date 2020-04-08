@@ -40,3 +40,16 @@ def main():
         default= ['UAA', 'UAG', 'UGA'],
         help= ('one or more possible stop codons.'))
 
+     # Parse the command-line arguments into a 'dict'-like container
+    args = parser.parse_args()
+
+    # Check to see if the path option was set to True by the caller. If so, parse
+    # the sequence from the path
+    if args.path:
+        sequence = parse_sequence_from_path(args.sequence)
+    else:
+        sequence = args.sequence
+
+    orf = find_orf.find_first_orf(sequence = sequence,
+        start_codons = args.start_codons,
+        stop_codons = args.stop_codons)
