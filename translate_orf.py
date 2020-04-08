@@ -62,5 +62,5 @@ def main():
     sys.stdout.write('{}\n'.format(translation))
 
 
-    if __name__ == '__main__':
-        main()
+if __name__ == '__main__':
+    main()
