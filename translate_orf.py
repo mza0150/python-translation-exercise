@@ -28,3 +28,15 @@ def main():
                 'containing the sequence to be searched.'))
 
 
+    parser.add_argument('-s', '--start-codons',
+        type=str,
+        nargs= '+', # one or more arguments
+        default= ['AUG'],
+        help=('One or more possible start codons.'))
+
+    parser.add_argument('-x', '--stop-codons',
+        type=str,
+        nargs='+',
+        default= ['UAA', 'UAG', 'UGA'],
+        help= ('one or more possible stop codons.'))
+
